@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-warning text-dark">
+                <h4 class="mb-0">✏️ Actualizar Cliente: {{ cliente.nombre }}</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{% url 'realizar_actualizacion_cliente' cliente.id_cliente %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" value="{{ cliente.nombre }}" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Apellido Paterno</label>
+                            <input type="text" class="form-control" name="apepaterno" value="{{ cliente.apepaterno }}" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Apellido Materno</label>
+                            <input type="text" class="form-control" name="apematerno" value="{{ cliente.apematerno }}" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Domicilio</label>
+                        <input type="text" class="form-control" name="domicilio" value="{{ cliente.domicilio }}">
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" name="correo" value="{{ cliente.correo }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Teléfono</label>
+                            <input type="text" class="form-control" name="telefono" value="{{ cliente.telefono }}" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Alergias</label>
+                        <textarea class="form-control" name="alergias" rows="3">{{ cliente.alergias }}</textarea>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-warning me-md-2">Actualizar Cliente</button>
+                        <a href="{% url 'ver_clientes' %}" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

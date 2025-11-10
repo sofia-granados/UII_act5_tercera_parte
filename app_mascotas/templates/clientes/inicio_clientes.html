@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title text-primary">👥 Gestión de Clientes</h2>
+                <p class="card-text">
+                    Sistema de administración para la gestión integral de clientes de la veterinaria. 
+                    Aquí podrás realizar todas las operaciones CRUD necesarias para el correcto 
+                    funcionamiento del establecimiento.
+                </p>
+                <h5 class="mt-4">Funcionalidades principales:</h5>
+                <ul>
+                    <li>Registro de nuevos clientes</li>
+                    <li>Consulta de información de clientes</li>
+                    <li>Actualización de datos personales</li>
+                    <li>Eliminación de registros</li>
+                    <li>Gestión de mascotas por cliente</li>
+                </ul>
+                <div class="mt-4">
+                    <a href="{% url 'agregar_cliente' %}" class="btn btn-primary me-2">➕ Agregar Cliente</a>
+                    <a href="{% url 'ver_clientes' %}" class="btn btn-success">📋 Ver Clientes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                     alt="Clientes" class="img-fluid rounded">
+                <h5 class="mt-3">Atención Personalizada</h5>
+                <p class="text-muted">Para nuestros clientes</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

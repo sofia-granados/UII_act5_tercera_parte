@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">➕ Agregar Nuevo Empleado</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Apellido Paterno</label>
+                            <input type="text" class="form-control" name="apepaterno" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Apellido Materno</label>
+                            <input type="text" class="form-control" name="apematerno" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Teléfono</label>
+                            <input type="text" class="form-control" name="telefono" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Ocupación</label>
+                            <input type="text" class="form-control" name="ocupacion" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Domicilio</label>
+                        <textarea class="form-control" name="domicilio" rows="2" placeholder="Dirección completa..."></textarea>
+                    </div>
+                    
+                    <!-- NUEVO: Campo para seleccionar mascotas a cargo -->
+                    <div class="mb-3">
+                        <label class="form-label">Mascotas a Cargo</label>
+                        <select class="form-select" name="mascotas" multiple size="4">
+                            {% for mascota in mascotas %}
+                                <option value="{{ mascota.id_animales }}">
+                                    🐕 {{ mascota.nombre }} ({{ mascota.especie }}) 
+                                    {% if mascota.dueno %}
+                                        - Dueño: {{ mascota.dueno.nombre }}
+                                    {% endif %}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <div class="form-text">
+                            ⚠️ Mantén presionada la tecla Ctrl (Cmd en Mac) para seleccionar múltiples mascotas
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Alergias</label>
+                        <textarea class="form-control" name="alergias" rows="3" placeholder="Alergias conocidas del empleado..."></textarea>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-primary me-md-2">Guardar Empleado</button>
+                        <a href="{% url 'ver_empleados' %}" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

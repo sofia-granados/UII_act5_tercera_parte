@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">📋 Lista de Clientes</h4>
+        <a href="{% url 'agregar_cliente' %}" class="btn btn-light btn-sm">➕ Agregar Nuevo</a>
+    </div>
+    <div class="card-body">
+        {% if clientes %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Mascotas</th>
+                        <th>Total Mascotas</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cliente in clientes %}
+                    <tr>
+                        <td>{{ cliente.id_cliente }}</td>
+                        <td><strong>{{ cliente.nombre }}</strong></td>
+                        <td>{{ cliente.apepaterno }} {{ cliente.apematerno }}</td>
+                        <td>{{ cliente.correo }}</td>
+                        <td>{{ cliente.telefono }}</td>
+                        <td>
+                            {% if cliente.animales_poseidos.all %}
+                                <div class="mascotas-lista">
+                                    {% for mascota in cliente.animales_poseidos.all %}
+                                    <span class="badge bg-primary mb-1 d-block text-start">
+                                        🐕 {{ mascota.nombre }} 
+                                        <small>({{ mascota.especie }})</small>
+                                        <br>
+                                        <small class="text-light">
+                                            Edad: {{ mascota.edad|default:"?" }} | 
+                                            Peso: {{ mascota.peso }}kg
+                                        </small>
+                                    </span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <span class="text-muted fst-italic">Sin mascotas registradas</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <span class="badge bg-secondary fs-6">
+                                {{ cliente.animales_poseidos.count }}
+                            </span>
+                        </td>
+                       <td>
+                            <a href="{% url 'detalle_cliente' cliente.id_cliente %}" class="btn btn-info btn-sm mb-1">👁️ Ver</a>
+                            <a href="{% url 'actualizar_cliente' cliente.id_cliente %}" class="btn btn-warning btn-sm mb-1">✏️ Editar</a>
+                            <a href="{% url 'borrar_cliente' cliente.id_cliente %}" class="btn btn-danger btn-sm mb-1">🗑️ Borrar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="alert alert-info text-center">
+            <h5>No hay clientes registrados</h5>
+            <p>Comienza agregando el primer cliente al sistema.</p>
+            <a href="{% url 'agregar_cliente' %}" class="btn btn-primary">Agregar Primer Cliente</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

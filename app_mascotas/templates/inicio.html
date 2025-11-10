@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title text-primary">Bienvenido al Sistema</h2>
+                <p class="card-text">
+                    Sistema de administración para la gestión integral de mascotas, clientes y empleados 
+                    de la veterinaria. Aquí podrás realizar todas las operaciones CRUD necesarias 
+                    para el correcto funcionamiento del establecimiento.
+                </p>
+                <h5 class="mt-4">Funcionalidades principales:</h5>
+                <ul>
+                    <li>Gestión completa de mascotas</li>
+                    <li>Administración de clientes</li>
+                    <li>Control de empleados</li>
+                    <li>Registro de historial médico</li>
+                    <li>Reportes y consultas</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                     alt="Mascotas" class="img-fluid rounded">
+                <h5 class="mt-3">Cuidado Profesional</h5>
+                <p class="text-muted">Para tus mejores amigos</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

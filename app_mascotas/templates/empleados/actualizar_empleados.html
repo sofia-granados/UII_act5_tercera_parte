@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-warning text-dark">
+                <h4 class="mb-0">✏️ Actualizar Empleado: {{ empleado.nombre }}</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{% url 'realizar_actualizacion_empleado' empleado.id_empleado %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" value="{{ empleado.nombre }}" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Apellido Paterno</label>
+                            <input type="text" class="form-control" name="apepaterno" value="{{ empleado.apepaterno }}" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Apellido Materno</label>
+                            <input type="text" class="form-control" name="apematerno" value="{{ empleado.apematerno }}" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Teléfono</label>
+                            <input type="text" class="form-control" name="telefono" value="{{ empleado.telefono }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Ocupación</label>
+                            <input type="text" class="form-control" name="ocupacion" value="{{ empleado.ocupacion }}" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Domicilio</label>
+                        <textarea class="form-control" name="domicilio" rows="2">{{ empleado.domicilio }}</textarea>
+                    </div>
+                    
+                    <!-- NUEVO: Campo para seleccionar mascotas a cargo -->
+                    <div class="mb-3">
+                        <label class="form-label">Mascotas a Cargo</label>
+                        <select class="form-select" name="mascotas" multiple size="4">
+                            {% for mascota in mascotas %}
+                                <option value="{{ mascota.id_animales }}" 
+                                    {% if mascota in empleado.animales_a_cargo.all %}selected{% endif %}>
+                                    🐕 {{ mascota.nombre }} ({{ mascota.especie }}) 
+                                    {% if mascota.dueno %}
+                                        - Dueño: {{ mascota.dueno.nombre }}
+                                    {% endif %}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <div class="form-text">
+                            ⚠️ Mantén presionada la tecla Ctrl (Cmd en Mac) para seleccionar múltiples mascotas
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Alergias</label>
+                        <textarea class="form-control" name="alergias" rows="3">{{ empleado.alergias }}</textarea>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-warning me-md-2">Actualizar Empleado</button>
+                        <a href="{% url 'ver_empleados' %}" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

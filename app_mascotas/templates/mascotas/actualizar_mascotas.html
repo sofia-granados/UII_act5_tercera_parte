@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+<div class="col-md-8">
+    <div class="card shadow-sm">
+        <div class="card-header bg-warning text-dark">
+            <h4 class="mb-0">✏️ Actualizar Mascota: {{ mascota.nombre }}</h4>
+        </div>
+        <div class="card-body">
+            <!-- AGREGAR: enctype="multipart/form-data" -->
+            <form method="POST" action="{% url 'realizar_actualizacion_mascota' mascota.id_animales %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <!-- Mostrar imagen actual si existe -->
+                {% if mascota.imagen %}
+                <div class="mb-3 text-center">
+                    <label class="form-label">Imagen Actual:</label>
+                    <div>
+                        <img src="{{ mascota.imagen.url }}" alt="{{ mascota.nombre }}" 
+                             class="img-thumbnail" style="max-height: 200px;">
+                    </div>
+                </div>
+                {% endif %}
+                
+                <div class="mb-3">
+                    <label class="form-label">Cambiar Imagen</label>
+                    <input type="file" class="form-control" name="imagen" accept="image/*">
+                    <div class="form-text">Dejar vacío para mantener la imagen actual</div>
+                </div>
+                <!-- En la sección del dueño, mejorar el dropdown -->
+<div class="mb-3">
+    <label class="form-label">Dueño (Cliente)</label>
+    <select class="form-select" name="dueno">
+        <option value="">-- Seleccionar dueño --</option>
+        {% for cliente in clientes %}
+            <option value="{{ cliente.id_cliente }}" {% if mascota.dueno and mascota.dueno.id_cliente == cliente.id_cliente %}selected{% endif %}>
+                👤 {{ cliente.nombre }} {{ cliente.apepaterno }} 
+                - 📧 {{ cliente.correo }} 
+                - 🐕 Mascotas: {{ cliente.animales_poseidos.count }}
+            </option>
+        {% endfor %}
+    </select>
+</div>
+                
+                <!-- NUEVO: Campo para seleccionar dueño -->
+                <div class="mb-3">
+                    <label class="form-label">Dueño (Cliente)</label>
+                    <select class="form-select" name="dueno">
+                        <option value="">-- Seleccionar dueño --</option>
+                        {% for cliente in clientes %}
+                            <option value="{{ cliente.id_cliente }}" {% if mascota.dueno and mascota.dueno.id_cliente == cliente.id_cliente %}selected{% endif %}>
+                                {{ cliente.nombre }} {{ cliente.apepaterno }} - {{ cliente.correo }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" value="{{ mascota.nombre }}" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Edad</label>
+                        <input type="text" class="form-control" name="edad" value="{{ mascota.edad }}">
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Peso (kg)</label>
+                        <input type="number" step="0.01" class="form-control" name="peso" value="{{ mascota.peso }}" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Especie</label>
+                        <input type="text" class="form-control" name="especie" value="{{ mascota.especie }}" required>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Cuidados Especiales</label>
+                    <textarea class="form-control" name="cuidados" rows="2">{{ mascota.cuidados }}</textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Enfermedades</label>
+                    <textarea class="form-control" name="enfermedades" rows="2">{{ mascota.enfermedades }}</textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Alimentación</label>
+                    <textarea class="form-control" name="alimentacion" rows="2">{{ mascota.alimentacion }}</textarea>
+                </div>
+                
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="submit" class="btn btn-warning me-md-2">Actualizar Mascota</button>
+                    <a href="{% url 'ver_mascotas' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-4 rounded">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'inicio_mascotas' %}">
+                        🏠 Inicio
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        🐶 Mascotas
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'agregar_mascota' %}">Agregar mascotas</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_mascotas' %}">Ver mascotas</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        👥 Clientes
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'inicio_clientes' %}">Inicio clientes</a></li>
+                        <li><a class="dropdown-item" href="{% url 'agregar_cliente' %}">Agregar clientes</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_clientes' %}">Ver clientes</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        👨‍💼 Empleados
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'inicio_empleados' %}">Inicio empleados</a></li>
+                        <li><a class="dropdown-item" href="{% url 'agregar_empleado' %}">Agregar empleados</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_empleados' %}">Ver empleados</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

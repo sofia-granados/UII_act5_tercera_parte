@@ -1,0 +1,15 @@
+<footer class="footer-custom py-3 mt-5">
+    <div class="container text-center">
+        <p class="mb-1">&copy; 2024 Derechos reservados | 
+           <span id="fecha-actual"></span>
+        </p>
+        <p class="mb-0">Creado por Sofia Granados Sanchez, Cbtis 128</p>
+    </div>
+    
+    <script>
+        // Mostrar fecha actual
+        const fecha = new Date();
+        document.getElementById('fecha-actual').textContent = 
+            fecha.toLocaleDateString('es-ES');
+    </script>
+</footer>

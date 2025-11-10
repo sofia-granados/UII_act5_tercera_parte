@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title text-primary">👨‍💼 Gestión de Empleados</h2>
+                <p class="card-text">
+                    Sistema de administración para la gestión integral del personal de la veterinaria. 
+                    Aquí podrás realizar todas las operaciones CRUD necesarias para el correcto 
+                    funcionamiento del establecimiento.
+                </p>
+                <h5 class="mt-4">Funcionalidades principales:</h5>
+                <ul>
+                    <li>Registro de nuevos empleados</li>
+                    <li>Consulta de información del personal</li>
+                    <li>Actualización de datos laborales</li>
+                    <li>Gestión de asignación de mascotas</li>
+                    <li>Control de alergias y restricciones</li>
+                </ul>
+                <div class="mt-4">
+                    <a href="{% url 'agregar_empleado' %}" class="btn btn-primary me-2">➕ Agregar Empleado</a>
+                    <a href="{% url 'ver_empleados' %}" class="btn btn-success">📋 Ver Empleados</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                    alt="Empleados" class="img-fluid rounded">
+                <h5 class="mt-3">Equipo Profesional</h5>
+                <p class="text-muted">Nuestro personal capacitado</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
